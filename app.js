@@ -15,6 +15,8 @@ const error = require("./API/middlewares/error")
 const PLAYERS = require("./API/routes/players")
 const COMMENTS = require("./API/routes/comments")
 
+const GAMES = require("./API/routes/games")
+const LEVELS = require("./API/routes/levels")
 
 
 app.use(express.urlencoded({ extended: true}));
@@ -34,6 +36,8 @@ app.get('/',(req, res)=>{
 
 app.use("/players", PLAYERS)
 app.use("/comments", COMMENTS)
+app.use("/levels", LEVELS)
+app.use("/comments", GAMES)
 
 
 

@@ -2,7 +2,7 @@ const prisma = require("../../prisma")
 
 const AddPlayer = async (req, res, next) => {
   try {
-    const { firstName, lastName } = req.body
+    const { firstName, lastName, password, userName, gender } = req.body
 
     if (!firstName || !lastName) {
       throw {
@@ -15,6 +15,9 @@ const AddPlayer = async (req, res, next) => {
       data: {
         firstName,
         lastName,
+        password,
+        userName,
+        gender,
         datecreated: new Date(),
         dateupdated: new Date(),
       },

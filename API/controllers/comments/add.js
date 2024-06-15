@@ -3,9 +3,9 @@ const prisma = new PrismaClient();
 
 const addComment = async (req, res, next) => {
   try {
-    const { comment} = req.body;
+    const { comment,id} = req.body;
 
-    if (!comment) {
+    if (!comment||!id) {
       return res.status(400).json({ message: "Comment is required" });
     }
 
