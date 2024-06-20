@@ -37,7 +37,7 @@ app.get('/',(req, res)=>{
 app.use("/players", PLAYERS)
 app.use("/comments", COMMENTS)
 app.use("/levels", LEVELS)
-app.use("/comments", GAMES)
+app.use("/games", GAMES)
 
 
 

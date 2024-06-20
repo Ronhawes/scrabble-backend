@@ -11,6 +11,7 @@ const addComment = async (req, res, next) => {
 
     const newComment = await prisma.comment.create({
       data: {
+        id,
         comment,
         created_at: new Date(),
         updated_at: new Date(),

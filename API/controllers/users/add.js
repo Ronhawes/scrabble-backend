@@ -1,30 +1,28 @@
-const prisma = require("../../prisma")
+const prisma = require("../../prisma");
 
 const AddPlayer = async (req, res, next) => {
   try {
-    const { firstName, lastName, password, userName, gender } = req.body
+    const { firstName, lastName, password, userName, gender } = req.body;
 
-    if (!firstName || !lastName) {
+    if (!firstName || !lastName || !password || !userName || !gender) {
       throw {
         custom: true,
-        message: "Fullnames and username are required",
+        message: "All fields are required: firstName, lastName, password, userName, and gender",
       };
     }
 
-    const player = await prisma.players.create({
+    const player = await prisma.player.create({
       data: {
         firstName,
         lastName,
         password,
         userName,
         gender,
-        datecreated: new Date(),
-        dateupdated: new Date(),
+   
       },
     });
 
-    return res.status(200).json({ message: "Player was added successfully" });
-
+    return res.status(201).json({ message: "Player was added successfully", player });
   } catch (error) {
     next(error);
   }

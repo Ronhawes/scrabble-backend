@@ -35,12 +35,12 @@ CREATE TABLE "Game" (
 
 -- CreateTable
 CREATE TABLE "Level" (
-    "playerId" BIGSERIAL NOT NULL,
+    "Id" BIGSERIAL NOT NULL,
     "levels" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
-    CONSTRAINT "Level_pkey" PRIMARY KEY ("playerId")
+    CONSTRAINT "Level_pkey" PRIMARY KEY ("Id")
 );
 
 -- CreateIndex
@@ -50,4 +50,4 @@ CREATE UNIQUE INDEX "Game_ranks_key" ON "Game"("ranks");
 ALTER TABLE "Comment" ADD CONSTRAINT "Comment_commentorId_fkey" FOREIGN KEY ("commentorId") REFERENCES "Player"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Level" ADD CONSTRAINT "Level_playerId_fkey" FOREIGN KEY ("playerId") REFERENCES "Player"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "Level" ADD CONSTRAINT "Level_Id_fkey" FOREIGN KEY ("Id") REFERENCES "Player"("id") ON DELETE CASCADE ON UPDATE CASCADE;

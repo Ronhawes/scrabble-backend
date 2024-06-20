@@ -3,7 +3,7 @@ const prisma = new PrismaClient();
 
 const getAllPlayers = async (req, res, next) => {
   try {
-    const players = await prisma.players.findMany();
+    const players = await prisma.player.findMany();
     if (players.length === 0) {
       return res.status(404).json({ message: "No players found" });
     }
@@ -27,7 +27,7 @@ const getPlayer = async (req, res, next) => {
       return res.status(400).json({ message: "ID must be a valid number" });
     }
 
-    const player = await prisma.players.findUnique({
+    const player = await prisma.player.findUnique({
       where: { id: parsedId },
     });
 
