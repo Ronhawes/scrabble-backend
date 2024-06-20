@@ -3,18 +3,17 @@ const prisma = new PrismaClient();
 
 const addComment = async (req, res, next) => {
   try {
-    const { comment,id} = req.body;
+    const { comment} = req.body;
 
-    if (!comment||!id) {
+    if (!comment) {
       return res.status(400).json({ message: "Comment is required" });
     }
 
     const newComment = await prisma.comment.create({
       data: {
-        id,
-        comment,
-        created_at: new Date(),
-        updated_at: new Date(),
+        
+        comment
+        
       },
     });
 
