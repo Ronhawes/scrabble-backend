@@ -1,29 +1,27 @@
-const prisma = require("../../prisma")
+const prisma = require("../../prisma");
 
 const UpdatePlayer = async (req, res, next) => {
   try {
-    const {id, firstName, LastName } = req.body;
+    const { id, firstName, lastName, gender, userName } = req.body;
 
-    if (!id || !firstName || !LastName) {
+    if (!id || !firstName || !lastName || !gender || !userName) {
       throw {
         custom: true,
-        message: "Player ID, fullnames, and username are required",
+        message: "ID, fullnames, gender, and username are required",
       };
     }
 
-    const player = await prisma.players.update({
-      where: {
-        playerid: parseInt(id),
-      },
+    const updatedPlayer = await prisma.player.update({
+      where: { id: parseInt(id) },
       data: {
-        firstNames,
-        LastName,
-        dateupdated: new Date(),
-        datecreated: new Date(),
+        firstName,
+        lastName,
+        gender,
+        userName
       },
     });
 
-    return res.status(200).json({ message: "Player updated successfully" });
+    return res.status(200).json({ message: "Player updated successfully", player: updatedPlayer });
 
   } catch (error) {
     next(error);
