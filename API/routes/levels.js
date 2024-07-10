@@ -10,7 +10,7 @@ router.post("/add", addLevel)
 router.delete("/delete", deleteLevel)
 router.put("/update", updateLevel)
 router.get("/getLevel", getLevelById)
-router.get("/getLevel", getAllLevels)
+router.get("/getLevels", getAllLevels)
 
 
 module.exports = router

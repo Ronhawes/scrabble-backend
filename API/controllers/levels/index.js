@@ -1,7 +1,8 @@
 const addLevel = require("./add");
 const deleteLevel = require("./delete");
 const updateLevel = require("./update");
-const {getLevelById, getAllLevels}= require("./getLevel");
+const getLevelById= require("./getLevel");
+const getAllLevels= require("./getLevels");
 
 
 module.exports = {

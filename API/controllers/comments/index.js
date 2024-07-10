@@ -1,7 +1,8 @@
 const addComment = require("./add")
 const deleteComment = require("./delete")
 const updateComment = require("./update")
-const {getComment, getAllComments} = require("./getComment")
+const getComment = require("./getComment")
+const  getAllComments = require("./getComments")
 
 
 module.exports = {

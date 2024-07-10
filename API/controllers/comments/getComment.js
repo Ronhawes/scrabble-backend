@@ -3,15 +3,21 @@ const prisma = new PrismaClient();
 
 const getComment = async (req, res, next) => {
   try {
-    const { id } = req.params;
+    const { id } = req.query;
 
     if (!id) {
-      return res.status(400).json({ message: "ID is required" });
+      throw {
+        custom: true,
+        message: "ID is required",
+      };
     }
 
     const parsedId = parseInt(id);
     if (isNaN(parsedId)) {
-      return res.status(400).json({ message: "ID must be a valid number" });
+      throw {
+        custom: true,
+        message: "ID must be a valid number",
+      };
     }
 
     const comment = await prisma.comment.findUnique({
@@ -19,22 +25,16 @@ const getComment = async (req, res, next) => {
     });
 
     if (!comment) {
-      return res.status(404).json({ message: "Comment not found" });
+      throw {
+        custom: true,
+        message: "Comment not found",
+      };
     }
 
-    return res.status(200).json({ comment });
+    return res.status(200).json(comment);
   } catch (error) {
-    next(error);
+    next()
   }
 };
 
-const getAllComments = async (req, res, next) => {
-  try {
-    const comments = await prisma.comment.findMany();
-    return res.status(200).json({ comments });
-  } catch (error) {
-    next(error);
-  }
-};
-
-module.exports = { getComment, getAllComments };
+module.exports = getComment;

@@ -7,6 +7,6 @@ router.post('/add', addComment);
 router.put('/update', updateComment);
 router.delete('/delete', deleteComment);
 router.get("/getComment", getComment);
-router.get("/getComment", getAllComments)
+router.get("/getComments", getAllComments)
 
 module.exports = router;

@@ -17,6 +17,7 @@ const COMMENTS = require("./API/routes/comments")
 
 const GAMES = require("./API/routes/games")
 const LEVELS = require("./API/routes/levels")
+const RANKINGS = require("./API/routes/ranking")
 
 
 app.use(express.urlencoded({ extended: true}));
@@ -38,6 +39,7 @@ app.use("/players", PLAYERS)
 app.use("/comments", COMMENTS)
 app.use("/levels", LEVELS)
 app.use("/games", GAMES)
+app.use("/rankings", RANKINGS)
 
 
 

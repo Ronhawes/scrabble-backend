@@ -4,37 +4,31 @@ const prisma = new PrismaClient();
 // Get a single level by ID
 const getLevelById = async (req, res, next) => {
   try {
-    const { id } = req.params;
+    const { id } = req.query;
 
     if (!id) {
-      return res.status(400).json({ message: "Level ID is required" });
+      throw{
+        custom: true,
+        message: "ID is required"
+      }
     }
-
-    // Find the level by ID
+    
     const level = await prisma.level.findUnique({
-      where: { id },
+      where: { id: parseInt(id) },
     });
 
     if (!level) {
-      return res.status(404).json({ message: "Level not found" });
+      throw {
+        custom: true,
+        message: "level not found",
+      };
     }
 
     return res.status(200).json({ level });
+  
   } catch (error) {
     next(error);
   }
 };
 
-// Get all levels
-const getAllLevels = async (req, res, next) => {
-  try {
-    // Retrieve all levels
-    const levels = await prisma.level.findMany();
-
-    return res.status(200).json({ levels });
-  } catch (error) {
-    next(error);
-  }
-};
-
-module.exports = { getLevelById, getAllLevels };
+module.exports = getLevelById 

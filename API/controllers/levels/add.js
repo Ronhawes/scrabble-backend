@@ -3,18 +3,19 @@ const prisma = new PrismaClient();
 
 const addLevel = async (req, res, next) => {
   try {
-    const { id, levels } = req.body;
+    const { name, difficulty } = req.body;
 
-    if (!id||levels) {
-      return res.status(400).json({ message: "id is required" });
+    if (!name||!difficulty) {
+      throw {
+        custom: true,
+        message: "name and difficulty are required",
+      };
     }
 
     const newLevel = await prisma.level.create({
       data: {
-        id,
-        levels,
-        created_at: new Date(),
-        updated_at: new Date(),
+        name,
+       difficulty
       },
     });
 
