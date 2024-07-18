@@ -2,9 +2,9 @@ const prisma = require("../../prisma");
 
 const UpdatePlayer = async (req, res, next) => {
   try {
-    const { id, firstName, lastName, gender, userName } = req.body;
+    const { id, firstname, lastname, gender, username } = req.body;
 
-    if (!id || !firstName || !lastName || !gender || !userName) {
+    if (!id || !firstname || !lastname || !gender || !username) {
       throw {
         custom: true,
         message: "ID, fullnames, gender, and username are required",
@@ -14,10 +14,10 @@ const UpdatePlayer = async (req, res, next) => {
     const updatedPlayer = await prisma.player.update({
       where: { id: parseInt(id) },
       data: {
-        firstName,
-        lastName,
+        firstname,
+        lastname,
         gender,
-        userName
+        username
       },
     });
 

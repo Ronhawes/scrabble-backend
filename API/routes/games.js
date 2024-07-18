@@ -1,16 +1,10 @@
-const { addGameplayed,
-    updateGameplayed,
-    deleteGameplayed,
-    getGameplayed,
-    getGame } = require("../controllers/games")
+const { addGameplayed, updateGameplayed, deleteGameplayed, getGame, getGames } = require("../controllers/games");
+const router = require("express").Router();
 
-const router = require("express").Router()
+router.post("/add", addGameplayed);
+router.delete("/delete", deleteGameplayed);
+router.put("/update", updateGameplayed);
+router.get("/getGame", getGame);
+router.get("/getGames", getGames);
 
-router.post("/add", addGameplayed)
-router.delete("/delete", deleteGameplayed)
-router.put("/update", updateGameplayed)
-router.get("/getGame", getGameplayed)
-router.get("/getGame", getGame)
-
-
-module.exports = router
+module.exports = router;

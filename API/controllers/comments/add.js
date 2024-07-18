@@ -3,9 +3,9 @@ const prisma = new PrismaClient();
 
 const addComment = async (req, res, next) => {
   try {
-    const { playerId, comment } = req.body;
+    const { playerid, comment } = req.body;
 
-    if (!playerId||!comment) {
+    if (!playerid||!comment) {
       throw {
         custom: true,
         message: "Comment is required",
@@ -15,7 +15,7 @@ const addComment = async (req, res, next) => {
     const newComment = await prisma.comment.create({
       
       data: {
-        playerId: parseInt(playerId),
+        playerid: parseInt(playerid),
         comment
       },
     });

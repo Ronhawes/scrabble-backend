@@ -6,7 +6,10 @@ const deleteGameplayed = async (req, res, next) => {
     const { id } = req.query;
 
     if (!id) {
-      return res.status(400).json({ message: "ID is required" });
+      throw {
+        custom: true,
+        message: " ID is required"
+    };
     }
 
     await prisma.game.delete({

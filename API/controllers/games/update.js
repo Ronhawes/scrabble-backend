@@ -3,22 +3,26 @@ const prisma = new PrismaClient();
 
 const updateGameplayed = async (req, res, next) => {
   try {
-    const { id, ranks} = req.query;
+    const { id, playerid, score, levelid } = req.body;
 
-    if (!id || !comment) {
-      return res.status(400).json({ message: "ID and comment are required" });
+    if (!id || !playerid || !score || !levelid) {
+      throw {
+        custom: true,
+        message: "ID, playerid, score, and levelid are required",
+      };
     }
 
+    
     const updatedGamePlayed = await prisma.game.update({
       where: { id: parseInt(id) },
       data: {
-        id,
-        ranks,
-        updated_at: new Date()
+        playerid,
+        score,
+        levelid,
       },
     });
 
-    return res.status(200).json({ message: " updated successfully", comment: updatedComment });
+    return res.status(200).json({ message: "Game updated successfully", updatedGamePlayed });
   } catch (error) {
     next(error);
   }

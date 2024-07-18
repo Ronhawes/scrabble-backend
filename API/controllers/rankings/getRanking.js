@@ -13,7 +13,7 @@ const getRanking = async (req, res, next) => {
     }
 
     const ranking = await prisma.ranking.findUnique({
-      where: { id: parseInt(id) },
+      where: { id: parsedId(id) },
     });
 
     if (!ranking) {

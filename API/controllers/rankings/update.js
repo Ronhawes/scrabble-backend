@@ -2,9 +2,9 @@ const prisma = require("../../prisma");
 
 const updateRanking = async (req, res, next) => {
   try {
-    const { id, playerId, rank, } = req.body;
+    const { id, playerid, scores, rank, } = req.body;
 
-    if (!id || !playerId || !rank ) {
+    if (!id || !playerid||!scores || !rank ) {
       throw {
         custom: true,
         message: "ID, playerId, rank are required",
@@ -14,7 +14,8 @@ const updateRanking = async (req, res, next) => {
     const updatedRanking = await prisma.ranking.update({
       where: { id: parseInt(id) },
       data: {
-        playerId,
+        playerid,
+        scores,
         rank
       },
     });

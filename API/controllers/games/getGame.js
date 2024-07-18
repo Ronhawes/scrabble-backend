@@ -1,42 +1,38 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
-const getGameplayed = async (req, res, next) => {
-  try {
-    const games = await prisma.game.findMany();
-    return res.status(200).json(games);
-  } catch (error) {
-    console.error("Error retrieving games:", error);
-    return res.status(500).json({ message: "Internal server error" });
-  }
-};
-
 const getGame = async (req, res, next) => {
   try {
-    const { id } = req.params;
+    const { id } = req.query;
 
     if (!id) {
-      return res.status(400).json({ message: "ID is required" });
+      throw {
+        custom: true,
+        message: "ID is required"
+      }
     }
 
-    const parsedId = parseInt(id);
-    if (isNaN(parsedId)) {
-      return res.status(400).json({ message: "ID must be a valid number" });
-    }
+    const gameId = parseInt(id); // Convert the id to an integer
 
     const game = await prisma.game.findUnique({
-      where: { id: parsedId },
+      where: { id: gameId },
     });
 
     if (!game) {
-      return res.status(404).json({ message: "Game not found" });
+      throw {
+        custom: true,
+        message: "Game not found",
+      };
     }
 
     return res.status(200).json(game);
+  
   } catch (error) {
-    console.error("Error retrieving game:", error);
-    return res.status(500).json({ message: "Internal server error" });
+    if (error.custom) {
+      return res.status(400).json({ error: error.message });
+    }
+    next(error);
   }
 };
 
-module.exports = { getGameplayed, getGame };
+module.exports = getGame;

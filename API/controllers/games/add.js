@@ -3,22 +3,23 @@ const prisma = new PrismaClient();
 
 const addGameplayed = async (req, res, next) => {
   try {
-    const { id, ranks} = req.body;
+    const { playerid,score,levelid} = req.body;
 
-    if (!id||!ranks) {
+    if (!playerid||!score||!levelid) {
       return res.status(400).json({ message: "id and ranks are required" });
     }
 
-    const newComment = await prisma.comment.create({
+    const newgame = await prisma.game.create({
       data: {
-        id,
-        ranks,
-        created_at: new Date(),
-        updated_at: new Date(),
+        playerid,
+        score,
+        levelid,
+        createdat: new Date(),
+        updatedat: new Date(),
       },
     });
 
-    return res.status(201).json({ message: " added successfully", comment: newComment });
+    return res.status(201).json({ message: " added successfully", comment: newgame });
   } catch (error) {
     next(error);
   }

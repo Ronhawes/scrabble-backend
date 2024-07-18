@@ -3,9 +3,9 @@ const prisma = new PrismaClient();
 
 const addRanking = async (req, res, next) => {
   try {
-    const { playerId, rank} = req.body;
+    const { playerid,scores,rank} = req.body;
 
-    if (!playerId || !rank) {
+    if (!playerid ||!scores|| !rank) {
       throw {
         custom: true,
         message: "playerId, rank, and score are required",
@@ -14,7 +14,8 @@ const addRanking = async (req, res, next) => {
 
     const newRanking = await prisma.ranking.create({
       data: {
-        playerId: parseInt(playerId),
+        playerid: parseInt(playerid),
+        scores,
         rank
       },
     });

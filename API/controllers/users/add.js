@@ -2,9 +2,9 @@ const prisma = require("../../prisma");
 
 const AddPlayer = async (req, res, next) => {
   try {
-    const { firstName, lastName, password, userName, gender } = req.body;
+    const { firstname, lastname, password, username, gender } = req.body;
 
-    if (!firstName || !lastName || !password || !userName || !gender) {
+    if (!firstname || !lastname || !password || !username || !gender) {
       throw {
         custom: true,
         message: "All fields are required: firstName, lastName, password, userName, and gender",
@@ -13,10 +13,10 @@ const AddPlayer = async (req, res, next) => {
 
     const player = await prisma.player.create({
       data: {
-        firstName,
-        lastName,
+        firstname,
+        lastname,
         password,
-        userName,
+        username,
         gender,
    
       },
